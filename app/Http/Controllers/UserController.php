@@ -25,10 +25,15 @@ class UserController extends Controller
 
         if (auth()->attempt(['username' => $incomingFields['loginusername'],'password' =>$incomingFields['loginpassword']])) {
             $request->session()->regenerate();
-            return 'login success!!!';
+            return redirect('/')->with("success", "You have successfuly logged in.");
         }else{
-            return 'login failed!';
+            return redirect('/')->with("error", "Invalid login.");
         }
+    }
+
+    public function logout(){
+        auth()->logout();
+        return redirect("/")->with("success", "You are successfuly logged out."); 
     }
 
 
@@ -38,7 +43,8 @@ class UserController extends Controller
             'email' => ['required', 'email', Rule::unique('users','email')],
             'password' => ['required', 'min:8', 'confirmed']
         ]);
-        User::create($incomingFields);
-        return 'hello from register function';
+        $user = User::create($incomingFields);
+        auth()->login($user);
+        return redirect('/')->with('success',"You successfuly created an account.");
     }
 }
