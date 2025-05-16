@@ -7,17 +7,20 @@ use App\Http\Controllers\UserController;
 
 // User Routes
 
-Route::get('/', [UserController::class, "showCorrectHomepage"]);
+Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 // Route::get('/poste', function () {
 //     return view('single-post');
 // });
-Route::post('/register', [UserController::class,"register"]);
-Route::post('/login', [UserController::class,"login"]);
-Route::post('/logout', [UserController::class,"logout"]);
+Route::post('/register', [UserController::class,"register"])->middleware('guest');
+Route::post('/login', [UserController::class,"login"])->middleware('guest');
+Route::post('/logout', [UserController::class,"logout"])->middleware('loggedIn');
 
 
 // Post Routes
-
-Route::get('/create-post', [PostController::class, "showCreateForm"]);
-Route::post('/create-post', [PostController::class, "createpost"]);
+Route::get('/create-post', [PostController::class, "showCreateForm"])->middleware('loggedIn');
+Route::post('/create-post', [PostController::class, "createpost"])->middleware('loggedIn');
 Route::get('/post/{post}', [PostController::class, "showSinglePost"]);
+
+
+// Profile Routes
+Route::get('/profile/{user:username}',[UserController::class, "profile"]);
