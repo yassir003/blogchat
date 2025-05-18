@@ -14,6 +14,7 @@ class PostController extends Controller
         return view('create-post');
     }
 
+
     public function createpost(Request $request) {
         $incomingFields = $request->validate([
             'title'=> 'required',
@@ -29,10 +30,12 @@ class PostController extends Controller
         return redirect("/post/{$newpost->id}")->with("success", 'New post successfully created.');
     }
 
+
     public function showSinglePost(Post $post) {
         $post['body'] = Str::markdown($post->body);
         return view('single-post',['post' => $post]);
     }
+
 
     public function deletePost(Post $post) {
         $post->delete();
@@ -40,9 +43,11 @@ class PostController extends Controller
         return redirect('/profile/' . auth()->user()->username)->with('success', 'Post successfully deleted.');
     }
 
+
     public function showEditForm(Post $post) {
         return view('edit-post', ['post' => $post]);
     }
+    
 
     public function EditPost(Post $post, Request $request) {
         $incomingFields = $request->validate([
