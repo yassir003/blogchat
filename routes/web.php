@@ -6,7 +6,6 @@ use App\Http\Controllers\UserController;
 
 
 // User Routes
-
 Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 // Route::get('/poste', function () {
 //     return view('single-post');
