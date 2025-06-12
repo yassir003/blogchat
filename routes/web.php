@@ -5,6 +5,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 
 
+Route::get('/admins-only', function() {
+    return 'Admin page only';
+})->middleware('can:visitAdminPages');
+
+
 // User Routes
 Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 // Route::get('/poste', function () {
@@ -13,6 +18,9 @@ Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 Route::post('/register', [UserController::class,"register"])->middleware('guest');
 Route::post('/login', [UserController::class,"login"])->middleware('guest');
 Route::post('/logout', [UserController::class,"logout"])->middleware('loggedIn');
+Route::get('/manage-avatar', [UserController::class,'showAvatarForm'])->middleware('loggedIn');
+Route::post('/manage-avatar', [UserController::class,'storeAvatar'])->middleware('loggedIn');
+
 
 
 // Post Routes
