@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 
 
 Route::get('/admins-only', function() {
@@ -34,3 +35,11 @@ Route::put('/post/{post}', [PostController::class, "EditPost"])->middleware('can
 
 // Profile Routes
 Route::get('/profile/{user:username}',[UserController::class, "profile"]);
+Route::get('/profile/{user:username}/followers',[UserController::class, "profileFollowers"]);
+Route::get('/profile/{user:username}/following',[UserController::class, "profileFollowing"]);
+
+
+
+// Follow Routes
+Route::post('/create-follow/{user:username}', [FollowController::class, 'createFollow'])->middleware('loggedIn');
+Route::post('/remove-follow/{user:username}', [FollowController::class, 'removeFollow'])->middleware('loggedIn');
