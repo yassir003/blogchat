@@ -61,22 +61,22 @@ class UserController extends Controller
 
         }
 
-        View::share('sharedData', ['currentFollowing'=> $currentFollowing, 'avatar'=> $user->avatar ,'username'=> $user->username, 'postCount' => $user->posts()->count()]);
+        View::share('sharedData', ['currentFollowing'=> $currentFollowing, 'avatar'=> $user->avatar ,'username'=> $user->username, 'postCount' => $user->posts()->count(), 'followersCount' => $user->followers()->count(), 'followingCount' => $user->followingUsers()->count()]);
     }
 
     public function profile(User $user){
         $this->getSharedData($user);
-        return view('profile-posts',['posts' => $posts = $user->posts()->get()]);
+        return view('profile-posts',['posts' =>$user->posts()->latest()->get()]);
     }
 
     public function profileFollowers(User $user){
         $this->getSharedData($user);
-        return view('profile-followers',['posts' => $posts = $user->posts()->get()]);
+        return view('profile-followers',['followers' =>$user->followers()->latest()->get()]);
     }
 
     public function profileFollowing(User $user){
         $this->getSharedData($user);
-        return view('profile-following',['posts' => $posts = $user->posts()->get()]);
+        return view('profile-following',['following' =>$user->followingUsers()->latest()->get()]);
     }
 
     public function showAvatarForm (){
