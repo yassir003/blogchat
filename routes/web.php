@@ -13,6 +13,7 @@ Route::get('/admins-only', function() {
 })->middleware('can:visitAdminPages');
 
 
+
 // User Routes
 Route::get('/', [UserController::class, "showCorrectHomepage"])->name('login');
 // Route::get('/poste', function () {
