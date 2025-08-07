@@ -47,6 +47,7 @@ Route::get('/profile/{user:username}/following',[UserController::class, "profile
 Route::post('/create-follow/{user:username}', [FollowController::class, 'createFollow'])->middleware('loggedIn');
 Route::post('/remove-follow/{user:username}', [FollowController::class, 'removeFollow'])->middleware('loggedIn');
 
+
 // Chat Routes
 Route::post('/send-chat-message', function(Request $request) {
     $formFields = $request->validate([
