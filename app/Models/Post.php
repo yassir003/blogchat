@@ -24,7 +24,7 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function toSearchbleArray() {
+    public function toSearchableArray() {
         return [
             'title' => $this->title,
             'body' => $this->body
