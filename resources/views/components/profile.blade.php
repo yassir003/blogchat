@@ -27,9 +27,9 @@
       </h2>
 
       <div class="profile-nav nav nav-tabs pt-2 mb-4">
-        <a href="/profile/{{$sharedData['username']}}" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "" ? "active" : ""}}">Posts: {{$sharedData['postCount']}}</a>
-        <a href="/profile/{{$sharedData['username']}}/followers" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "followers" ? "active" : ""}}">Followers: {{$sharedData['followersCount']}}</a>
-        <a href="/profile/{{$sharedData['username']}}/following" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "following" ? "active" : ""}}">Following: {{$sharedData['followingCount']}}</a>
+        <a wire:navigate href="/profile/{{$sharedData['username']}}" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "" ? "active" : ""}}">Posts: {{$sharedData['postCount']}}</a>
+        <a wire:navigate href="/profile/{{$sharedData['username']}}/followers" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "followers" ? "active" : ""}}">Followers: {{$sharedData['followersCount']}}</a>
+        <a wire:navigate href="/profile/{{$sharedData['username']}}/following" class="profile-nav-link nav-item nav-link {{ Request::segment(3) == "following" ? "active" : ""}}">Following: {{$sharedData['followingCount']}}</a>
       </div>
 
       <div class="profile-slot-content">
